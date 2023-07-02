@@ -22,6 +22,11 @@
 - Start application by using command **python3 main.py** 
 - Server must be listening on **Running on http://127.0.0.1:5000**
 
+#### Run Test Cases
+- Move to "tests" directory using **cd tests**
+- Run test command **python3 -m pytest -qv test_main.py** 
+- Testcases must be passed with message **18 passed**
+
 
 # REST API Documentation
 
