@@ -194,7 +194,7 @@ class TestRestAPI:
         assert resp.status_code == 200
         assert json_resp['total_balance'] == 400
 
-    # GET method - Account Detail - Verify Receiver balance = 500
+    # GET method - Account Detail - Verify Receiver balance = 600
     def test_0018_get_verify_updated_receiver_balance(self):
         user_url = 'http://{}/api/account_detail/{}'.format(self.BASE_URL, "MEZN11223344556688")
         resp = self.session.get(user_url, headers=self.headers)
