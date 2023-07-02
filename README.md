@@ -1,16 +1,27 @@
 # Flask App
 
-### Installation And Start Server
+#### Prerequisite 
+
+- Python must be installed 
+
+#### Framework / Library
+
+- Flask
+- SQLLite
+- Requests 
+- PyTest
+
+### Installation
 
 - Clone repository using **git clone git@github.com:MAhsan133/flask_api_test_automation.git**
 - Move to "flask_api_test_automation" directory using **cd flask_api_test_automation**
 - Run command **pip install -r requirements.txt** to install all libraries
+
+#### Run Server 
 - Move to "FLASK_REST_SERVICE" directory using **cd FLASK_REST_SERVICE**
 - Start application by using command **python3 main.py** 
-
-#### Running Server (Address:Port)
-
 - Server must be listening on **Running on http://127.0.0.1:5000**
+
 
 # REST API Documentation
 
