@@ -18,6 +18,11 @@ def api_get_accounts(account_id):
     return jsonify(db_obj.get_account_by_id(account_id))
 
 
+@app.route('/api/account_detail/<account_number>', methods=['GET'])
+def api_get_account_detail(account_number):
+    return jsonify(db_obj.get_account_detail_by_number(account_number))
+
+
 @app.route('/api/users/<user_id>', methods=['GET'])
 def api_get_user(user_id):
     return jsonify(db_obj.get_user_by_id(user_id))
@@ -44,6 +49,12 @@ def api_amount_withdraws():
 def api_amount_deposits():
     deposit_info = request.get_json()
     return jsonify(db_obj.account_deposit_amount(deposit_info))
+
+
+@app.route('/api/accounts/send',  methods = ['POST'])
+def api_amount_send():
+    send_info = request.get_json()
+    return jsonify(db_obj.send_amount(send_info))
 
 
 if __name__ == "__main__":
