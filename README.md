@@ -23,13 +23,15 @@
 - Server must be listening on **Running on http://127.0.0.1:5000**
 
 
-### Run Functional Test Cases
+## Run Functional Test Cases
 - Move to "tests" directory using **cd tests**
 - Run test command **python3 -m pytest -qv test_main.py** 
 - Testcases must be passed with message **20 passed**
 
 
-### Non-Functional testcases - Load Testing (Apache Jmeter)
+## Non-Functional testcases 
+
+### Load Testing (Apache Jmeter)
 
 #### Prerequisite 
 
@@ -55,6 +57,12 @@
 - Moved to the directory using **cd test_reports**  
 - Open **index.html** file to view report
 
+
+### Performance Testing (Script)
+
+#### Script Run 
+- Move to "tests" directory using **cd tests**
+- Run test command **python3 performance_test.py** 
 
 
 # REST API Documentation
