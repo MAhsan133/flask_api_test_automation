@@ -29,7 +29,7 @@
 - Testcases must be passed with message **20 passed**
 
 
-## Non-Functional testcases 
+## Non-Functional Test Cases 
 
 ### Load Testing (Apache Jmeter)
 
