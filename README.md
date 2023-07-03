@@ -46,12 +46,14 @@
 
 - Move to the directory using **cd apache-jmeter-5.6/bin**
 - Run **sh jmeter.sh** from terminal
-- Click the Run(Green color play) icon  
+- Click the Run(Green color play) icon 
+- Open **rest_api_load_test.JMX** file using File > Open from GUI View 
 - View results under **View Results Tree** sampler
 
 #### Run command line (Recommended)
 
 - Move to the directory using **cd apache-jmeter-5.6/bin**
+- Copy file to bin directory using **cp rest_api_load_test.JMX apache-jmeter-5.6/bin**
 - Run command **./jmeter.sh -n -t "<path>/rest_api_load_test.jmx -f -l test-results-sample.csv** to generated results in CSV file
 - Run command **./jmeter.sh -g test-results-sample.csv -f -o test_reports** to generate web based reoprt
 - Moved to the directory using **cd test_reports**  
