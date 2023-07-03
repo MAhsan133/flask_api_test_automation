@@ -56,8 +56,16 @@ class TestRestAPI:
         assert resp.status_code == 200
         assert total_records == 2
 
+    # GET method - ALL Accounts - Verify total records=0 and response=200
+    def test_0005_get_all_accounts1(self):
+        user_url = 'http://{}/api/accounts'.format(self.BASE_URL)
+        resp = self.session.get(user_url, headers=self.headers)
+        total_records = len(json.loads(resp.text))
+        assert resp.status_code == 200
+        assert total_records == 0
+
     # POST method - Create New account 1 with custom data
-    def test_0005_post_create_account1(self):
+    def test_0006_post_create_account1(self):
         user_url = 'http://{}/api/accounts/add'.format(self.BASE_URL)
         user_data = {
                 "acc_no": "MEZN11223344556688",
@@ -70,7 +78,7 @@ class TestRestAPI:
         assert json.loads(resp.text)['Status'] == "Passed"
 
     # POST method - Create New account 2 with custom data
-    def test_0006_post_create_account2(self):
+    def test_0007_post_create_account2(self):
         user_url = 'http://{}/api/accounts/add'.format(self.BASE_URL)
         user_data = {
             "acc_no": "SCB11223344556688",
@@ -82,8 +90,16 @@ class TestRestAPI:
         assert resp.status_code == 200
         assert json.loads(resp.text)['Status'] == "Passed"
 
+    # GET method - ALL Accounts - Verify total records=2 and response=200
+    def test_0008_get_all_accounts2(self):
+        user_url = 'http://{}/api/accounts'.format(self.BASE_URL)
+        resp = self.session.get(user_url, headers=self.headers)
+        total_records = len(json.loads(resp.text))
+        assert resp.status_code == 200
+        assert total_records == 2
+
     # POST method - Amount withdraw from account with in available balance
-    def test_0007_post_withdraw_amount(self):
+    def test_0009_post_withdraw_amount(self):
         user_url = 'http://{}/api/accounts/withdraws'.format(self.BASE_URL)
         user_data = {
             "acc_no": "MEZN11223344556688",
@@ -94,7 +110,7 @@ class TestRestAPI:
         assert json.loads(resp.text)['Status'] == "Passed"
 
     # GET method - Account Detail - Verify balance = 200
-    def test_0008_get_account_balance(self):
+    def test_0010_get_account_balance(self):
         user_url = 'http://{}/api/account_detail/{}'.format(self.BASE_URL, "MEZN11223344556688")
         resp = self.session.get(user_url, headers=self.headers)
         json_resp = json.loads(resp.text)
@@ -102,7 +118,7 @@ class TestRestAPI:
         assert json_resp['total_balance'] == 200
 
     # POST method - Amount withdraw with more than available balance
-    def test_0009_post_withdraw_amount_error(self):
+    def test_0011_post_withdraw_amount_error(self):
         user_url = 'http://{}/api/accounts/withdraws'.format(self.BASE_URL)
         user_data = {
             "acc_no": "MEZN11223344556688",
@@ -113,7 +129,7 @@ class TestRestAPI:
         assert json.loads(resp.text)['Message'] == "Insufficient Balance"
 
     # POST method - Amount deposit
-    def test_0010_post_deposit_amount(self):
+    def test_0012_post_deposit_amount(self):
         user_url = 'http://{}/api/accounts/deposits'.format(self.BASE_URL)
         user_data = {
             "acc_no": "MEZN11223344556688",
@@ -124,7 +140,7 @@ class TestRestAPI:
         assert json.loads(resp.text)['Status'] == "Passed"
 
     # GET method - Account Detail - Verify balance = 400
-    def test_0011_get_verify_updated_account_balance(self):
+    def test_0013_get_verify_updated_account_balance(self):
         user_url = 'http://{}/api/account_detail/{}'.format(self.BASE_URL, "MEZN11223344556688")
         resp = self.session.get(user_url, headers=self.headers)
         json_resp = json.loads(resp.text)
@@ -132,7 +148,7 @@ class TestRestAPI:
         assert json_resp['total_balance'] == 400
 
     # POST method - Send Amount to other account
-    def test_0012_post_send_amount(self):
+    def test_0014_post_send_amount(self):
         user_url = 'http://{}/api/accounts/send'.format(self.BASE_URL)
         user_data = {
             "from_acc_no": "MEZN11223344556688",
@@ -145,7 +161,7 @@ class TestRestAPI:
         assert json.loads(resp.text)['Message'] == 'Amount Transfer successfully.'
 
     # GET method - Account Detail - Verify Sender balance = 100
-    def test_0013_get_verify_updated_sender_balance(self):
+    def test_0015_get_verify_updated_sender_balance(self):
         user_url = 'http://{}/api/account_detail/{}'.format(self.BASE_URL, "MEZN11223344556688")
         resp = self.session.get(user_url, headers=self.headers)
         json_resp = json.loads(resp.text)
@@ -153,7 +169,7 @@ class TestRestAPI:
         assert json_resp['total_balance'] == 100
 
     # GET method - Account Detail - Verify Receiver balance = 900
-    def test_0014_get_verify_updated_receiver_balance(self):
+    def test_0016_get_verify_updated_receiver_balance(self):
         user_url = 'http://{}/api/account_detail/{}'.format(self.BASE_URL, "SCB11223344556688")
         resp = self.session.get(user_url, headers=self.headers)
         json_resp = json.loads(resp.text)
@@ -161,7 +177,7 @@ class TestRestAPI:
         assert json_resp['total_balance'] == 900
 
     # POST method - Send Amount to other account - Insufficient balance
-    def test_0015_post_send_amount_insufficient(self):
+    def test_0017_post_send_amount_insufficient(self):
         user_url = 'http://{}/api/accounts/send'.format(self.BASE_URL)
         user_data = {
             "from_acc_no": "MEZN11223344556688",
@@ -174,7 +190,7 @@ class TestRestAPI:
         assert json.loads(resp.text)['Message'] == 'Insufficient Balance.'
 
     # POST method - Send Amount from other account
-    def test_0016_post_send_amount_from_other(self):
+    def test_0018_post_send_amount_from_other(self):
         user_url = 'http://{}/api/accounts/send'.format(self.BASE_URL)
         user_data = {
             "from_acc_no": "SCB11223344556688",
@@ -187,7 +203,7 @@ class TestRestAPI:
         assert json.loads(resp.text)['Message'] == 'Amount Transfer successfully.'
 
     # GET method - Account Detail - Verify Sender balance = 400
-    def test_0017_get_verify_other_sender_balance(self):
+    def test_0019_get_verify_other_sender_balance(self):
         user_url = 'http://{}/api/account_detail/{}'.format(self.BASE_URL, "SCB11223344556688")
         resp = self.session.get(user_url, headers=self.headers)
         json_resp = json.loads(resp.text)
@@ -195,7 +211,7 @@ class TestRestAPI:
         assert json_resp['total_balance'] == 400
 
     # GET method - Account Detail - Verify Receiver balance = 600
-    def test_0018_get_verify_updated_receiver_balance(self):
+    def test_0020_get_verify_updated_receiver_balance(self):
         user_url = 'http://{}/api/account_detail/{}'.format(self.BASE_URL, "MEZN11223344556688")
         resp = self.session.get(user_url, headers=self.headers)
         json_resp = json.loads(resp.text)

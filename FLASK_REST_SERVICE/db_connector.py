@@ -140,6 +140,22 @@ class DBConnection(object):
             users = []
         return users
 
+    def get_accounts(self):
+        accounts = []
+        try:
+            conn = self.connect_to_db()
+            conn.row_factory = sqlite3.Row
+            cur = conn.cursor()
+            cur.execute("SELECT * FROM account_info")
+            rows = cur.fetchall()
+            for i in rows:
+                user = {"user_id": i["user_id"], "account_id": i["account_id"], "acc_no": i["acc_no"],
+                        "acc_type": i["acc_type"], "total_balance": i["total_balance"], "acc_status": i["acc_status"]}
+                accounts.append(user)
+        except:
+            accounts = []
+        return accounts
+
     def get_user_by_id(self, user_id):
         user = {}
         try:

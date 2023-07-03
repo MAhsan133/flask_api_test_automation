@@ -25,7 +25,7 @@
 #### Run Test Cases
 - Move to "tests" directory using **cd tests**
 - Run test command **python3 -m pytest -qv test_main.py** 
-- Testcases must be passed with message **18 passed**
+- Testcases must be passed with message **20 passed**
 
 
 # REST API Documentation

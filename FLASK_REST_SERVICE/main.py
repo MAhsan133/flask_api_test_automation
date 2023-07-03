@@ -13,19 +13,24 @@ def api_get_users():
     return jsonify(db_obj.get_users())
 
 
+@app.route('/api/users/<user_id>', methods=['GET'])
+def api_get_user(user_id):
+    return jsonify(db_obj.get_user_by_id(user_id))
+
+
+@app.route('/api/accounts', methods=['GET'])
+def api_get_all_accounts():
+    return jsonify(db_obj.get_accounts())
+
+
 @app.route('/api/accounts/<account_id>', methods=['GET'])
-def api_get_accounts(account_id):
+def api_get_account(account_id):
     return jsonify(db_obj.get_account_by_id(account_id))
 
 
 @app.route('/api/account_detail/<account_number>', methods=['GET'])
 def api_get_account_detail(account_number):
     return jsonify(db_obj.get_account_detail_by_number(account_number))
-
-
-@app.route('/api/users/<user_id>', methods=['GET'])
-def api_get_user(user_id):
-    return jsonify(db_obj.get_user_by_id(user_id))
 
 
 @app.route('/api/users/add',  methods = ['POST'])
