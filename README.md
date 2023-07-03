@@ -11,7 +11,7 @@
 - Requests 
 - PyTest
 
-### Installation
+#### Installation
 
 - Clone repository using **git clone git@github.com:MAhsan133/flask_api_test_automation.git**
 - Move to "flask_api_test_automation" directory using **cd flask_api_test_automation**
@@ -29,33 +29,32 @@
 - Testcases must be passed with message **20 passed**
 
 
-# Non-Functional testcases
-
-## Load Testing (Apache Jmeter)
+### Non-Functional testcases - Load Testing (Apache Jmeter)
 
 #### Prerequisite 
 
 - Requires Java 8+ to be installed
 
-### Download & Installation
+#### Download & Installation
 
 - Download latest binary ZIP file from **https://jmeter.apache.org/download_jmeter.cgi**
 - Unzip **apache-jmeter-5.6** file
 
-### Run GUI mode
+#### Run GUI mode
 
 - Move to the directory using **cd apache-jmeter-5.6/bin**
 - Run **sh jmeter.sh** from terminal
 - Click the Run(Green color play) icon  
 - View results under **View Results Tree** sampler
 
-### Run command line (Recommended)
+#### Run command line (Recommended)
 
 - Move to the directory using **cd apache-jmeter-5.6/bin**
 - Run command **./jmeter.sh -n -t "<path>/rest_api_load_test.jmx -f -l test-results-sample.csv** to generated results in CSV file
 - Run command **./jmeter.sh -g test-results-sample.csv -f -o test_reports** to generate web based reoprt
 - Moved to the directory using **cd test_reports**  
 - Open **index.html** file to view report
+
 
 
 # REST API Documentation
