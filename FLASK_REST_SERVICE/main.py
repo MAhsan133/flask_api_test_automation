@@ -18,6 +18,11 @@ def api_get_user(user_id):
     return jsonify(db_obj.get_user_by_id(user_id))
 
 
+@app.route('/api/users/add',  methods = ['POST'])
+def api_add_user():
+    return jsonify(db_obj.create_new_user(request.get_json()))
+
+
 @app.route('/api/accounts', methods=['GET'])
 def api_get_all_accounts():
     return jsonify(db_obj.get_accounts())
@@ -28,20 +33,15 @@ def api_get_account(account_id):
     return jsonify(db_obj.get_account_by_id(account_id))
 
 
-@app.route('/api/account_detail/<account_number>', methods=['GET'])
-def api_get_account_detail(account_number):
-    return jsonify(db_obj.get_account_detail_by_number(account_number))
-
-
-@app.route('/api/users/add',  methods = ['POST'])
-def api_add_user():
-    return jsonify(db_obj.create_new_user(request.get_json()))
-
-
 @app.route('/api/accounts/add',  methods = ['POST'])
 def api_add_accounts():
     account = request.get_json()
     return jsonify(db_obj.create_user_account(account))
+
+
+@app.route('/api/account_detail/<account_number>', methods=['GET'])
+def api_get_account_detail(account_number):
+    return jsonify(db_obj.get_account_detail_by_number(account_number))
 
 
 @app.route('/api/accounts/withdraws',  methods = ['POST'])

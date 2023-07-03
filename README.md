@@ -22,10 +22,40 @@
 - Start application by using command **python3 main.py** 
 - Server must be listening on **Running on http://127.0.0.1:5000**
 
-#### Run Test Cases
+
+### Run Functional Test Cases
 - Move to "tests" directory using **cd tests**
 - Run test command **python3 -m pytest -qv test_main.py** 
 - Testcases must be passed with message **20 passed**
+
+
+# Non-Functional testcases
+
+## Load Testing (Apache Jmeter)
+
+#### Prerequisite 
+
+- Requires Java 8+ to be installed
+
+### Download & Installation
+
+- Download latest binary ZIP file from **https://jmeter.apache.org/download_jmeter.cgi**
+- Unzip **apache-jmeter-5.6** file
+
+### Run GUI mode
+
+- Move to the directory using **cd apache-jmeter-5.6/bin**
+- Run **sh jmeter.sh** from terminal
+- Click the Run(Green color play) icon  
+- View results under **View Results Tree** sampler
+
+### Run command line (Recommended)
+
+- Move to the directory using **cd apache-jmeter-5.6/bin**
+- Run command **./jmeter.sh -n -t "<path>/rest_api_load_test.jmx -f -l test-results-sample.csv** to generated results in CSV file
+- Run command **./jmeter.sh -g test-results-sample.csv -f -o test_reports** to generate web based reoprt
+- Moved to the directory using **cd test_reports**  
+- Open **index.html** file to view report
 
 
 # REST API Documentation
