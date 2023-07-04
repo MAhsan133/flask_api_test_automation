@@ -4,10 +4,10 @@
 
 - Python must be installed 
 
-#### Framework / Library
+#### Database / Framework / Library 
 
-- Flask
 - SQLLite
+- Flask
 - Requests 
 - PyTest
 
