@@ -148,7 +148,7 @@ The REST API to the Banking app is described below.
     
     {"Message":"User created successfully","Status":"Passed"}
 
-## Get list of Things again
+## Create new account
 
 ### Request
 
@@ -167,7 +167,7 @@ The REST API to the Banking app is described below.
     
     {"Message":"Account created successfully","Status":"Passed"}
 
-## Change a Thing's state
+## Withdraw amount
 
 ### Request
 
@@ -186,7 +186,7 @@ The REST API to the Banking app is described below.
     
     {"Message":"Amount withdraw successfully","Status":"Passed"}
 
-## Get changed Thing
+## Deposit amount
 
 ### Request
 
@@ -205,7 +205,7 @@ The REST API to the Banking app is described below.
     
     {"Message":"Amount deposit successfully","Status":"Passed"}
 
-## Change a Thing
+## Send amount
 
 ### Request
 
