@@ -60,9 +60,9 @@
 - Open **index.html** file to view report
 
 
-### Performance Testing (Script)
+### Performance Testing (Python Script)
 
-#### Script Run (Verify responsiveness and stability under a particular workload)
+#### Script Run (Verify responsiveness after 5000 calls)
 - Move to "tests" directory using **cd tests**
 - Run test command **python3 performance_test.py** 
 
