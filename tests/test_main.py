@@ -1,6 +1,7 @@
 import requests
 import json
 from EnvironmentHelper import EnvironementSetup
+import os
 
 
 class TestRestAPI:
@@ -11,6 +12,14 @@ class TestRestAPI:
         cls.BASE_URL = env_obj.get_base_url()
         cls.session = requests.session()
         cls.headers = {'Content-Type': 'application/json'}
+
+    def read_file(self, file_name):
+        full_file_name = os.path.join(os.getcwd(), "data", file_name)
+        # Opening JSON file
+        f = open(full_file_name)
+        # returns JSON object as a dictionary
+        data = json.load(f)
+        return data
 
     # GET method - ALL Users - Verify total records=0 and response=200
     def test_0001_get_all_users1(self):
@@ -23,13 +32,7 @@ class TestRestAPI:
     # POST method - Create New user 1 with custom data in request body
     def test_0002_post_create_user1(self):
         user_url = 'http://{}/api/users/add'.format(self.BASE_URL)
-        user_data = {
-            "name": "Paul Serice",
-            "email": "paul.serice@gamil.com",
-            "phone": "067765434567",
-            "address": "Paul Serice Street, Innsbruck",
-            "country": "Austria"
-        }
+        user_data = self.read_file("user1.json")
         resp = self.session.post(url=user_url, json=user_data, headers=self.headers)
         assert resp.status_code == 200
         assert json.loads(resp.text)['Status'] == "Passed"
@@ -37,13 +40,7 @@ class TestRestAPI:
     # POST method - Create New user 2 with custom data in request body
     def test_0003_post_create_user2(self):
         user_url = 'http://{}/api/users/add'.format(self.BASE_URL)
-        user_data = {
-            "name": "James Bond",
-            "email": "james.bond@gamil.com",
-            "phone": "067765434567",
-            "address": "James Bond Street, Innsbruck",
-            "country": "Austria"
-        }
+        user_data = self.read_file("user2.json")
         resp = self.session.post(url=user_url, json=user_data, headers=self.headers)
         assert resp.status_code == 200
         assert json.loads(resp.text)['Status'] == "Passed"
@@ -67,12 +64,7 @@ class TestRestAPI:
     # POST method - Create New account 1 with custom data
     def test_0006_post_create_account1(self):
         user_url = 'http://{}/api/accounts/add'.format(self.BASE_URL)
-        user_data = {
-                "acc_no": "MEZN11223344556688",
-                "acc_status": "Active",
-                "total_balance": 500,
-                "user_id": 1
-        }
+        user_data = self.read_file("account1.json")
         resp = self.session.post(url=user_url, json=user_data, headers=self.headers)
         assert resp.status_code == 200
         assert json.loads(resp.text)['Status'] == "Passed"
@@ -80,12 +72,7 @@ class TestRestAPI:
     # POST method - Create New account 2 with custom data
     def test_0007_post_create_account2(self):
         user_url = 'http://{}/api/accounts/add'.format(self.BASE_URL)
-        user_data = {
-            "acc_no": "SCB11223344556688",
-            "acc_status": "Active",
-            "total_balance": 600,
-            "user_id": 2
-        }
+        user_data = self.read_file("account2.json")
         resp = self.session.post(url=user_url, json=user_data, headers=self.headers)
         assert resp.status_code == 200
         assert json.loads(resp.text)['Status'] == "Passed"
@@ -101,10 +88,7 @@ class TestRestAPI:
     # POST method - Amount withdraw from account with in available balance
     def test_0009_post_withdraw_amount(self):
         user_url = 'http://{}/api/accounts/withdraws'.format(self.BASE_URL)
-        user_data = {
-            "acc_no": "MEZN11223344556688",
-            "amt_withdrawn": 300
-        }
+        user_data = self.read_file("withdraw_amount_account1.json")
         resp = self.session.post(url=user_url, json=user_data, headers=self.headers)
         assert resp.status_code == 200
         assert json.loads(resp.text)['Status'] == "Passed"
@@ -120,10 +104,7 @@ class TestRestAPI:
     # POST method - Amount withdraw with more than available balance
     def test_0011_post_withdraw_amount_error(self):
         user_url = 'http://{}/api/accounts/withdraws'.format(self.BASE_URL)
-        user_data = {
-            "acc_no": "MEZN11223344556688",
-            "amt_withdrawn": 300
-        }
+        user_data = self.read_file("withdraw_amount_account1.json")
         resp = self.session.post(url=user_url, json=user_data, headers=self.headers)
         assert resp.status_code == 200
         assert json.loads(resp.text)['Message'] == "Insufficient Balance"
@@ -131,10 +112,7 @@ class TestRestAPI:
     # POST method - Amount deposit
     def test_0012_post_deposit_amount(self):
         user_url = 'http://{}/api/accounts/deposits'.format(self.BASE_URL)
-        user_data = {
-            "acc_no": "MEZN11223344556688",
-            "amt_deposit": 200
-        }
+        user_data = self.read_file("deposit_amount_account1.json")
         resp = self.session.post(url=user_url, json=user_data, headers=self.headers)
         assert resp.status_code == 200
         assert json.loads(resp.text)['Status'] == "Passed"
@@ -150,11 +128,7 @@ class TestRestAPI:
     # POST method - Send Amount to other account
     def test_0014_post_send_amount(self):
         user_url = 'http://{}/api/accounts/send'.format(self.BASE_URL)
-        user_data = {
-            "from_acc_no": "MEZN11223344556688",
-            "to_acc_no": "SCB11223344556688",
-            "amt_withdrawn": 300
-        }
+        user_data = self.read_file("amount_transfer_acct1_to_acct2.json")
         resp = self.session.post(url=user_url, json=user_data, headers=self.headers)
         assert resp.status_code == 200
         assert json.loads(resp.text)['Status'] == "Passed"
@@ -179,11 +153,7 @@ class TestRestAPI:
     # POST method - Send Amount to other account - Insufficient balance
     def test_0017_post_send_amount_insufficient(self):
         user_url = 'http://{}/api/accounts/send'.format(self.BASE_URL)
-        user_data = {
-            "from_acc_no": "MEZN11223344556688",
-            "to_acc_no": "SCB11223344556688",
-            "amt_withdrawn": 300
-        }
+        user_data = self.read_file("amount_transfer_acct1_to_acct2.json")
         resp = self.session.post(url=user_url, json=user_data, headers=self.headers)
         assert resp.status_code == 200
         assert json.loads(resp.text)['Status'] == "Passed"
@@ -192,11 +162,7 @@ class TestRestAPI:
     # POST method - Send Amount from other account
     def test_0018_post_send_amount_from_other(self):
         user_url = 'http://{}/api/accounts/send'.format(self.BASE_URL)
-        user_data = {
-            "from_acc_no": "SCB11223344556688",
-            "to_acc_no": "MEZN11223344556688",
-            "amt_withdrawn": 500
-        }
+        user_data = self.read_file("amount_transfer_acct2_to_acct1.json")
         resp = self.session.post(url=user_url, json=user_data, headers=self.headers)
         assert resp.status_code == 200
         assert json.loads(resp.text)['Status'] == "Passed"

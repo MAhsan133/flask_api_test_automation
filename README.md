@@ -62,7 +62,7 @@
 
 ### Performance Testing (Script)
 
-#### Script Run 
+#### Script Run (Verify responsiveness and stability under a particular workload)
 - Move to "tests" directory using **cd tests**
 - Run test command **python3 performance_test.py** 
 
